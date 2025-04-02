@@ -34,7 +34,7 @@ git push origin feature/upload-files
 ## Как работать с кодом локально?
 Каждый разработчик клонирует репозиторий и обновляет подмодули:
 
-```git clone --recurse-submodules https://github.com/your-org/oil-spill-devops.git```
+```git clone --recurse-submodules https://github.com/oil-spill-ai/oil-spill-devops```
 
 ```cd oil-spill-devops```
 
