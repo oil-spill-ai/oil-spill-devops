@@ -2,3 +2,4 @@
 .idea/
 *.iml
 .idea_modules/
+.env
