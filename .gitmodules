@@ -7,3 +7,4 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/oil-spill-ai/oil-spill-backend.git
+	branch = main
