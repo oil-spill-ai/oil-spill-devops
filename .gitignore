@@ -3,3 +3,5 @@
 *.iml
 .idea_modules/
 .env
+
+.DS_Store
