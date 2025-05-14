@@ -1,3 +1,4 @@
+; Новые (старые) модули
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/oil-spill-ai/oil-spill-frontend.git
