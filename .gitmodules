@@ -1,10 +1,10 @@
 [submodule "frontend"]
 	path = frontend
-	url = https://github.com/oil-spill-ai/oil-spill-frontend.git
+	url = git@github.com:oil-spill-ai/oil-spill-frontend.git
 [submodule "ml"]
 	path = ml
-	url = https://github.com/oil-spill-ai/oil-spill-ml.git
+	url = git@github.com:oil-spill-ai/oil-spill-ml.git
 [submodule "backend"]
 	path = backend
-	url = https://github.com/oil-spill-ai/oil-spill-backend.git
+	url = git@github.com:oil-spill-ai/oil-spill-backend.git
 	branch = main
