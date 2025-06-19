@@ -1,23 +1,53 @@
+version: '3.8'
+
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
-      - ML_SERVICE_URL=http://ml:5000
+      - ML_SERVICE_URL=http://ml:8002
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ./backend/results:/app/results
     depends_on:
       - ml
+      - redis
+    restart: unless-stopped
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
     depends_on:
       - backend
+    restart: unless-stopped
 
   ml:
-    build: ./ml
+    build:
+      context: ./ml
+      dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "8002:8002"
+    volumes:
+      - ./ml/weights:/app/weights
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
