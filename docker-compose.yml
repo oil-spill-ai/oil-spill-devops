@@ -8,13 +8,29 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - ML_SERVICE_URL=http://ml:8002
+      - ML_SERVICE_URL=http://ml:8002/segment
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
     volumes:
       - ./backend/results:/app/results
     depends_on:
       - ml
+      - redis
+    restart: unless-stopped
+
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: celery -A app worker --loglevel=info
+    environment:
+      - ML_SERVICE_URL=http://ml:8002/segment
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ./backend/results:/app/results
+    depends_on:
+      - backend
       - redis
     restart: unless-stopped
 
